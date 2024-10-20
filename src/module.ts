@@ -1,6 +1,4 @@
-import { PanelPlugin } from '@grafana/data';
-// import { SimpleOptions } from './types';
-// import { SimplePanel } from './components/SimplePanel';
+import { Field, FieldType, PanelPlugin } from '@grafana/data';
 import { PanelOptions } from './types';
 import { ImagePanel } from './components';
 
@@ -8,38 +6,15 @@ import { ImagePanel } from './components';
   * Panel Plugins
 */
 export const plugin = new PanelPlugin<PanelOptions>(ImagePanel).setPanelOptions((builder) => {
-  return builder
-    .addTextInput({
-      path: 'url',
-      name: 'Image URL',
-      // description: 'Description of panel option',
-      defaultValue: 'https',
-    })
-    // .addBooleanSwitch({
-    //   path: 'showSeriesCount',
-    //   name: 'Show series counter',
-    //   defaultValue: false,
-    // })
-    // .addRadio({
-    //   path: 'seriesCountSize',
-    //   defaultValue: 'sm',
-    //   name: 'Series counter size',
-    //   settings: {
-    //     options: [
-    //       {
-    //         value: 'sm',
-    //         label: 'Small',
-    //       },
-    //       {
-    //         value: 'md',
-    //         label: 'Medium',
-    //       },
-    //       {
-    //         value: 'lg',
-    //         label: 'Large',
-    //       },
-    //     ],
-    //   },
-    //   showIf: (config) => config.showSeriesCount,
-    // });
+  builder.addFieldNamePicker({
+    path: 'name',
+    name: 'Field name',
+    description:
+      'Name of the field with URL, If not specified, first field will be taken.',
+    settings: {
+      filter: (f: Field) => f.type === FieldType.string,
+      noFieldsMessage: 'No strings fields found',
+    },
+  })
+  return builder;
 });

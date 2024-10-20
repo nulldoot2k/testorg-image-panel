@@ -23,9 +23,8 @@
   "panels": [
     {
       "datasource": {
-        "name": "-- Grafana --",
-        "type": "datasource",
-        "uid": "grafana"
+        "type": "marcusolsson-static-datasource",
+        "uid": "U0HP2Rv4z"
       },
       "gridPos": {
         "h": 8,
@@ -37,15 +36,30 @@
       "options": {
         "seriesCountSize": "sm",
         "showSeriesCount": false,
-        "text": "Description for my first grafana panel"
+        "text": "Description for my first grafana panel",
+        "url": "https://fs.buttercms.com/resize=width:940/4SBBdUmCTVCkXqW4Y0ec"
       },
       "targets": [
         {
           "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
+            "type": "marcusolsson-static-datasource",
+            "uid": "U0HP2Rv4z"
           },
-          "queryType": "randomWalk",
+          "frame": {
+            "fields": [
+              {
+                "config": {},
+                "name": "URL",
+                "type": "string",
+                "values": [
+                  "https://fs.buttercms.com/resize=width:940/4SBBdUmCTVCkXqW4Y0ec"
+                ]
+              }
+            ],
+            "meta": {},
+            "name": "Image Name"
+          },
+          "hide": false,
           "refId": "A"
         }
       ],
@@ -62,6 +76,7 @@
     "from": "now-6h",
     "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "browser",
   "title": "Image Grafana Panel",

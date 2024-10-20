@@ -1,39 +1,32 @@
 import React from 'react';
-import { PanelProps } from '@grafana/data';
+import { PanelProps, FieldType } from '@grafana/data';
 import { PanelOptions } from 'types';
 import { css, cx } from '@emotion/css';
-import { useStyles2, useTheme2 } from '@grafana/ui';
-import { PanelDataErrorView } from '@grafana/runtime';
+import { useStyles2 } from '@grafana/ui';
+import { Styles } from '../../styles';
 
+/**
+ * Properties
+ */
 interface Props extends PanelProps<PanelOptions> {}
 
-const getStyles = () => {
-  return {
-    wrapper: css`
-      font-family: Open Sans;
-      position: relative;
-    `,
-    svg: css`
-      position: absolute;
-      top: 0;
-      left: 0;
-    `,
-    textBox: css`
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      padding: 10px;
-    `,
-  };
-};
-
+/**
+ * Image Panel
+ */
 export const ImagePanel: React.FC<Props> = ({ options, data, width, height, fieldConfig, id }) => {
-  const theme = useTheme2();
-  const styles = useStyles2(getStyles);
-
-  if (data.series.length === 0) {
-    return <PanelDataErrorView fieldConfig={fieldConfig} panelId={id} data={data} needsStringField />;
-  }
+  /**
+   * styles
+   */
+  const styles = useStyles2(Styles);
+  /*
+   * Name field (string)
+   */
+  let src = data.series
+  .map((series) =>
+    series.fields.find((field) => field.type === FieldType.string && (!options.name || field.name === options.name))
+  )
+  .map((field) => field?.values.get(field.values.length - 1))
+  .toString();
 
   return (
     <div
@@ -45,18 +38,13 @@ export const ImagePanel: React.FC<Props> = ({ options, data, width, height, fiel
         `
       )}
     >
-      <svg
-        className={styles.svg}
+      <img
+        className={styles.img}
         width={width}
         height={height}
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-        viewBox={`-${width / 2} -${height / 2} ${width} ${height}`}
+        src={src}
       >
-        <g>
-          <circle data-testid="simple-panel-circle" style={{ fill: theme.colors.primary.main }} r={100} />
-        </g>
-      </svg>
+      </img>
     </div>
   );
 };
