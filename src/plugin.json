@@ -5,7 +5,7 @@
   "id": "testorg-image-panel",
   "info": {
     "keywords": ["panel"],
-    "description": "",
+    "description": "Display image using url",
     "author": {
       "name": "Test org"
     },
@@ -13,13 +13,27 @@
       "small": "img/logo.svg",
       "large": "img/logo.svg"
     },
-    "links": [],
-    "screenshots": [],
+    "link": [
+      {
+        "name": "Documentation",
+        "url": "https://github.com/nulldoot2k/README.md"
+      },
+      {
+        "name": "Github",
+        "url": "https://github.com/nulldoot2k/testorg-image-panel"
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "Panel",
+        "path": "img/panel.png"
+      }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
   "dependencies": {
-    "grafanaDependency": ">=10.4.0",
+    "grafanaDependency": ">=10.0.0",
     "plugins": []
   }
 }
